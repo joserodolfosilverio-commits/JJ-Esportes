@@ -21,6 +21,93 @@
        10% de desconto em compras acima de R$100. 
        15% de desconto em compras acima de R$150.
        20% de desconto em compras acima de 200.
-    </p>
-</body>
-</html>
+    
+       
+       <!DOCTYPE html><html lang="pt-BR">
+        <head>
+          <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Loja de Esportes</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin:0; background:#f4f4f4; }
+                        header { background:#111; color:#fff; padding:15px; text-align:center; }
+                            .topbar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#222; color:#fff; }
+                                .cart { cursor:pointer; }
+                                    .container { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:20px; padding:20px; }
+                                        .card { background:#fff; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,.1); padding:12px; text-align:center; }
+                                            .card img { width:100%; height:150px; object-fit:cover; border-radius:10px; }
+                                                .price { color:green; margin:8px 0; }
+                                                    button { background:#111; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+                                                        button:hover { background:#333; }
+                                                            .cart-box { position:fixed; right:0; top:0; width:300px; height:100%; background:#fff; box-shadow:-3px 0 10px rgba(0,0,0,.2); padding:15px; overflow:auto; display:none; }
+                                                                .cart-box h2 { margin-top:0; }
+                                                                    .cart-item { border-bottom:1px solid #ddd; padding:8px 0; }
+                                                                      </style>
+                                                                      </head>
+                                                                      <body><header>
+                                                                        <h1>🏆 Loja de Esportes</h1>
+                                                                        </header><div class="topbar">
+                                                                          <span>Produtos</span>
+                                                                            <span class="cart" onclick="toggleCart()">🛒 Carrinho (<span id="count">0</span>)</span>
+                                                                            </div><div class="container" id="products"></div><div class="cart-box" id="cartBox">
+                                                                              <h2>🛒 Carrinho</h2>
+                                                                                <div id="cartItems"></div>
+                                                                                  <h3>Total: R$ <span id="total">0</span></h3>
+                                                                                  </div><script>
+                                                                                  const produtos = [
+                                                                                    {nome:"Bola de Futebol", preco:79.9, img:"https://images.unsplash.com/photo-1517649763962-0c623066013b"},
+                                                                                      {nome:"Chuteira", preco:199.9, img:"https://images.unsplash.com/photo-1521412644187-c49fa049e84d"},
+                                                                                        {nome:"Bola de Vôlei", preco:89.9, img:"https://images.unsplash.com/photo-1592659762303-90081d34b277"},
+                                                                                          {nome:"Joelheira", preco:49.9, img:"https://images.unsplash.com/photo-1605296867304-46d5465a13f1"},
+                                                                                            {nome:"Bola de Basquete", preco:99.9, img:"https://images.unsplash.com/photo-1519861531473-9200262188bf"},
+                                                                                              {nome:"Regata Basquete", preco:59.9, img:"https://images.unsplash.com/photo-1520975922324-8c0b5e1d54b0"},
+                                                                                                {nome:"Halteres", preco:149.9, img:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438"},
+                                                                                                  {nome:"Corda de Pular", preco:29.9, img:"https://images.unsplash.com/photo-1599058917212-d750089bc07e"}
+                                                                                                  ];
+
+                                                                                                  let carrinho = [];
+
+                                                                                                  function renderProdutos(){
+                                                                                                    const container = document.getElementById('products');
+                                                                                                      container.innerHTML = '';
+                                                                                                        produtos.forEach((p,i)=>{
+                                                                                                            container.innerHTML += `
+                                                                                                                  <div class="card">
+                                                                                                                          <img src="${p.img}">
+                                                                                                                                  <h3>${p.nome}</h3>
+                                                                                                                                          <p class="price">R$ ${p.preco}</p>
+                                                                                                                                                  <button onclick="addCarrinho(${i})">Comprar</button>
+                                                                                                                                                        </div>`;
+                                                                                                                                                          });
+                                                                                                                                                          }
+
+                                                                                                                                                          function addCarrinho(i){
+                                                                                                                                                            carrinho.push(produtos[i]);
+                                                                                                                                                              updateCart();
+                                                                                                                                                              }
+
+                                                                                                                                                              function updateCart(){
+                                                                                                                                                                const items = document.getElementById('cartItems');
+                                                                                                                                                                  const count = document.getElementById('count');
+                                                                                                                                                                    const total = document.getElementById('total');
+
+                                                                                                                                                                      items.innerHTML = '';
+                                                                                                                                                                        let soma = 0;
+
+                                                                                                                                                                          carrinho.forEach(p=>{
+                                                                                                                                                                              soma += p.preco;
+                                                                                                                                                                                  items.innerHTML += `<div class='cart-item'>${p.nome} - R$ ${p.preco}</div>`;
+                                                                                                                                                                                    });
+
+                                                                                                                                                                                      count.innerText = carrinho.length;
+                                                                                                                                                                                        total.innerText = soma.toFixed(2);
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        function toggleCart(){
+                                                                                                                                                                                          const box = document.getElementById('cartBox');
+                                                                                                                                                                                            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+                                                                                                                                                                                            }
+
+                                                                                                                                                                                            renderProdutos();
+                                                                                                                                                                                            </script></body>
+                                                                                                                                                                                            </html>
