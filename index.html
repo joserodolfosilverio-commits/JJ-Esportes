@@ -13,114 +13,112 @@
     <h2>
         Seja bem-vindo a JJ ESPORTES, sua jornada esportiva merece o melhor suporte. Unimos inovação, durabilidade e desing, aqui você encontra o estilo e o conforto
         necessários para superar seus desafios diários. Explore a nossa coleção e prepare-se para o próximo nível.
-    </h2>
-    <p>
-    
+        
+      <!DOCTYPE html><html lang="pt-BR">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Loja Esportiva Pro</title>
+        <style>
+        body{font-family:Arial;margin:0;background:#eef2f7}
+        header{background:#0d1b2a;color:#fff;padding:15px;text-align:center}
+        .top{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#1b263b;color:#fff}
+        select{padding:5px;border-radius:6px}
+        .container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:15px}
+        .card{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+        .card img{width:100%;height:140px;object-fit:cover;border-radius:10px}
+        button{background:#1b263b;color:#fff;border:none;padding:8px;border-radius:6px;cursor:pointer}
+        button:hover{background:#415a77}
+        .cart-box{position:fixed;right:0;top:0;width:320px;height:100%;background:#fff;padding:15px;display:none;overflow:auto;box-shadow:-3px 0 10px rgba(0,0,0,.2)}
+        .cart-item{border-bottom:1px solid #ddd;padding:6px}
+        .login{display:none;position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:20px;border-radius:10px;box-shadow:0 0 10px #0003}
+        </style>
+        </head>
+        <body><header><h1>🏆 Loja Esportiva Pro</h1></header><div class="top">
+        <select onchange="filtrar(this.value)">
+        <option value="all">Todos esportes</option>
+        <option value="futebol">Futebol</option>
+        <option value="volei">Vôlei</option>
+        <option value="basquete">Basquete</option>
+        <option value="handebol">Handebol</option>
+        </select><span onclick="toggleCart()">🛒 (<span id="count">0</span>)</span> <span onclick="toggleLogin()">👤 Login</span>
 
-        <!DOCTYPE html><html lang="pt-BR">
-            <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Loja Esportiva Pro</title>
-            <style>
-            body{font-family:Arial;margin:0;background:#eef2f7}
-            header{background:#0d1b2a;color:#fff;padding:15px;text-align:center}
-            .top{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#1b263b;color:#fff}
-            select{padding:5px;border-radius:6px}
-            .container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:15px}
-            .card{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.1)}
-            .card img{width:100%;height:140px;object-fit:cover;border-radius:10px}
-            button{background:#1b263b;color:#fff;border:none;padding:8px;border-radius:6px;cursor:pointer}
-            button:hover{background:#415a77}
-            .cart-box{position:fixed;right:0;top:0;width:320px;height:100%;background:#fff;padding:15px;display:none;overflow:auto;box-shadow:-3px 0 10px rgba(0,0,0,.2)}
-            .cart-item{border-bottom:1px solid #ddd;padding:6px}
-            .login{display:none;position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:20px;border-radius:10px;box-shadow:0 0 10px #0003}
-            </style>
-            </head>
-            <body><header><h1>🏆 Loja Esportiva Pro</h1></header><div class="top">
-            <select onchange="filtrar(this.value)">
-            <option value="all">Todos esportes</option>
-            <option value="futebol">Futebol</option>
-            <option value="volei">Vôlei</option>
-            <option value="basquete">Basquete</option>
-            <option value="handebol">Handebol</option>
-            </select><span onclick="toggleCart()">🛒 (<span id="count">0</span>)</span> <span onclick="toggleLogin()">👤 Login</span>
+        </div><div class="container" id="products"></div><div class="cart-box" id="cartBox">
+        <h2>Carrinho</h2>
+        <div id="cartItems"></div>
+        <h3>Total: R$ <span id="total">0</span></h3>
+        <button onclick="finalizar()">Finalizar Compra</button>
+        </div><div class="login" id="loginBox">
+        <h3>Login</h3>
+        <input placeholder="Usuário"><br><br>
+        <input placeholder="Senha" type="password"><br><br>
+        <button onclick="alert('Login feito (simulado)')">Entrar</button>
+        </div><script>
+        const produtos=[
+        {nome:"Tênis Vôlei Pro",cat:"volei",preco:500,img:"https://source.unsplash.com/300x200/?volleyball-shoes"},
+        {nome:"Tênis Vôlei Speed",cat:"volei",preco:450,img:"https://source.unsplash.com/300x200/?indoor-court-shoes"},
+        {nome:"Tênis Vôlei Elite",cat:"volei",preco:600,img:"https://source.unsplash.com/300x200/?sports-shoes"},
+        {nome:"Bola Futebol",cat:"futebol",preco:80,img:"https://source.unsplash.com/300x200/?soccer-ball"},
+        {nome:"Chuteira",cat:"futebol",preco:200,img:"https://source.unsplash.com/300x200/?soccer-shoes"},
+        {nome:"Bola Vôlei",cat:"volei",preco:90,img:"https://source.unsplash.com/300x200/?volleyball"},
+        {nome:"Tênis Vôlei",cat:"volei",preco:220,img:"https://source.unsplash.com/300x200/?volleyball-shoes"},
+        {nome:"Bomba Vôlei",cat:"volei",preco:40,img:"https://source.unsplash.com/300x200/?ball-pump"},
+        {nome:"Bola Basquete",cat:"basquete",preco:100,img:"https://source.unsplash.com/300x200/?basketball"},
+        {nome:"Regata Basquete",cat:"basquete",preco:60,img:"https://source.unsplash.com/300x200/?basketball-jersey"},
+        {nome:"Bola Handebol",cat:"handebol",preco:85,img:"https://source.unsplash.com/300x200/?handball"},
+        {nome:"Corda",cat:"outro",preco:30,img:"https://source.unsplash.com/300x200/?jump-rope"},
+        {nome:"Halter",cat:"outro",preco:150,img:"https://source.unsplash.com/300x200/?dumbbell"}
+        ];
 
-            </div><div class="container" id="products"></div><div class="cart-box" id="cartBox">
-            <h2>Carrinho</h2>
-            <div id="cartItems"></div>
-            <h3>Total: R$ <span id="total">0</span></h3>
-            <button onclick="finalizar()">Finalizar Compra</button>
-            </div><div class="login" id="loginBox">
-            <h3>Login</h3>
-            <input placeholder="Usuário"><br><br>
-            <input placeholder="Senha" type="password"><br><br>
-            <button onclick="alert('Login feito (simulado)')">Entrar</button>
-            </div><script>
-            const produtos=[
-            {nome:"Bola Futebol",cat:"futebol",preco:80,img:"https://source.unsplash.com/300x200/?soccer-ball"},
-            {nome:"Chuteira",cat:"futebol",preco:200,img:"https://source.unsplash.com/300x200/?soccer-shoes"},
-            {nome:"Bola Vôlei",cat:"volei",preco:90,img:"https://source.unsplash.com/300x200/?volleyball"},
-            {nome:"Tênis Vôlei",cat:"volei",preco:220,img:"https://source.unsplash.com/300x200/?volleyball-shoes"},
-            {nome:"Bomba Vôlei",cat:"volei",preco:40,img:"https://source.unsplash.com/300x200/?ball-pump"},
-            {nome:"Bola Basquete",cat:"basquete",preco:100,img:"https://source.unsplash.com/300x200/?basketball"},
-            {nome:"Regata Basquete",cat:"basquete",preco:60,img:"https://source.unsplash.com/300x200/?basketball-jersey"},
-            {nome:"Bola Handebol",cat:"handebol",preco:85,img:"https://source.unsplash.com/300x200/?handball"},
-            {nome:"Corda",cat:"outro",preco:30,img:"https://source.unsplash.com/300x200/?jump-rope"},
-            {nome:"Halter",cat:"outro",preco:150,img:"https://source.unsplash.com/300x200/?dumbbell"},
-    
-            ];
+        let carrinho=[];
+        let filtro="all";
 
-            let carrinho=[];
-            let filtro="all";
+        function render(){
+        const el=document.getElementById('products');
+        el.innerHTML="";
+        produtos.filter(p=>filtro==='all'||p.cat===filtro).forEach((p,i)=>{
+        el.innerHTML+=`<div class='card'>
+        <img src='${p.img}'>
+        <h4>${p.nome}</h4>
+        <p>R$ ${p.preco}</p>
+        <button onclick='add(${i})'>Comprar</button>
+        </div>`;
+        });
+        }
 
-            function render(){
-            const el=document.getElementById('products');
-            el.innerHTML="";
-            produtos.filter(p=>filtro==='all'||p.cat===filtro).forEach((p,i)=>{
-            el.innerHTML+=`<div class='card'>
-            <img src='${p.img}'>
-            <h4>${p.nome}</h4>
-            <p>R$ ${p.preco}</p>
-            <button onclick='add(${i})'>Comprar</button>
-            </div>`;
-            });
-            }
+        function add(i){carrinho.push(produtos[i]);update();}
 
-            function add(i){carrinho.push(produtos[i]);update();}
+        function remover(index){carrinho.splice(index,1);update();}
 
-            function remover(index){carrinho.splice(index,1);update();}
+        function update(){
+        let items=document.getElementById('cartItems');
+        let total=0;
+        items.innerHTML="";
+        carrinho.forEach((p,i)=>{
+        total+=p.preco;
+        items.innerHTML+=`<div class='cart-item'>${p.nome} - R$ ${p.preco} <button onclick='remover(${i})'>X</button></div>`;
+        });
+        document.getElementById('count').innerText=carrinho.length;
+        document.getElementById('total').innerText=total.toFixed(2);
+        }
 
-            function update(){
-            let items=document.getElementById('cartItems');
-            let total=0;
-            items.innerHTML="";
-            carrinho.forEach((p,i)=>{
-            total+=p.preco;
-            items.innerHTML+=`<div class='cart-item'>${p.nome} - R$ ${p.preco} <button onclick='remover(${i})'>X</button></div>`;
-            });
-            document.getElementById('count').innerText=carrinho.length;
-            document.getElementById('total').innerText=total.toFixed(2);
-            }
+        function toggleCart(){
+        let box=document.getElementById('cartBox');
+        box.style.display=box.style.display==='block'?'none':'block';
+        }
 
-            function toggleCart(){
-            let box=document.getElementById('cartBox');
-            box.style.display=box.style.display==='block'?'none':'block';
-            }
+        function finalizar(){
+        alert('Compra finalizada! (simulação)');
+        carrinho=[];update();
+        }
 
-            function finalizar(){
-            alert('Compra finalizada! (simulação)');
-            carrinho=[];update();
-            }
+        function toggleLogin(){
+        let l=document.getElementById('loginBox');
+        l.style.display=l.style.display==='block'?'none':'block';
+        }
 
-            function toggleLogin(){
-            let l=document.getElementById('loginBox');
-            l.style.display=l.style.display==='block'?'none':'block';
-            }
+        function filtrar(cat){filtro=cat;render();}
 
-            function filtrar(cat){filtro=cat;render();}
-
-            render();
-            </script></body>
-            </html>
-           
+        render();
+        </script></body>
+        </html>     
